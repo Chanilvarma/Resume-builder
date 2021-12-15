@@ -32,7 +32,19 @@ const Education = () => {
 
     // handle click event of the Add button
     const handleAddClick = () => {
-        setInputList([...inputList, { firstName: "", lastName: "" }]);
+        setInputList([...inputList,
+        {
+            degree: "",
+            institute: "",
+            percent: "",
+            from: "",
+            to: "",
+            city: "",
+            state: "",
+            country: "",
+            pin: "",
+        },
+        ]);
     };
 
     return (
@@ -120,20 +132,20 @@ const Education = () => {
                             </div>
                             <div className="row">
                                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <button className="btn btn-outline-success me-md-2">Save</button>
-                                        {inputList.length !== 1 && <button
-                                            className="btn btn-outline-danger"
-                                            onClick={() => handleRemoveClick(index)}>Remove</button>}
-                                        {inputList.length - 1 === index && <button className="btn btn-outline-info" onClick={handleAddClick}>Add</button>}
-                                   
-                                </div>
 
+                                    {inputList.length !== 1 && <button
+                                        className="btn btn-outline-danger"
+                                        onClick={() => handleRemoveClick(index)}>Remove</button>}
+                                    {inputList.length - 1 === index && <button className="btn btn-outline-info" onClick={handleAddClick}>Add</button>}
+
+                                </div>
                             </div>
                         </form>
                     )
                 })}
-
-
+            </div>
+            <div class="d-grid gap-2">
+                <button class="btn btn-outline-success" type="submit">Save</button>
             </div>
         </div>
     );
