@@ -1,12 +1,13 @@
 import '../styles/FormGrid.css'
 import React,{useState} from 'react'
-import Declaration from './forms/Declaration';
+
 import Education from './forms/Education';
 import Experience from './forms/Experience'
 import Objective from './forms/Objective'
 import Personal from './forms/Personal'
 import Projects from './forms/Projects'
 import Skills from './forms/Skills'
+import BasicForm from './basicForm';
 const FormGrid = () => {
     const [active, setActive] = useState('personal')
     return (
@@ -32,9 +33,11 @@ const FormGrid = () => {
                         <li className="nav-item">
                             <button className={active === 'project'? 'nav-link active': 'nav-link'}  onClick={() => setActive('project')}>projects</button>
                         </li>
+                        
                         <li className="nav-item">
-                            <button className={active  === 'declaration'? 'nav-link active': 'nav-link'}  onClick={() => setActive('declaration')}>Declaration</button>
+                            <button className={active === 'basic'? 'nav-link active': 'nav-link'}  onClick={() => setActive('basic')}>basic</button>
                         </li>
+                        
                     </ul>
                 </div>
                 <div className="card-body">
@@ -44,7 +47,8 @@ const FormGrid = () => {
                 {active === 'skill' && <Skills/>}
                 {active === 'experience' && <Experience/>}
                 {active === 'project' && <Projects/>}
-                {active === 'declaration' && <Declaration/>}
+                {active === 'basic' && <BasicForm/>}
+               
                 </div>
             </div>
         </div>

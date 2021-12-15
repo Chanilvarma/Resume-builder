@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Education = () => {
-    const [inputList, setInputList] = useState([
+    const [educationData, setEducationData] = useState([
         {
             degree: "",
             institute: "",
@@ -18,21 +18,21 @@ const Education = () => {
     // handle input change
     const handleInputChange = (e, index) => {
         const { name, value } = e.target;
-        const list = [...inputList];
+        const list = [...educationData];
         list[index][name] = value;
-        setInputList(list);
+        setEducationData(list);
     };
 
     // handle click event of the Remove button
     const handleRemoveClick = index => {
-        const list = [...inputList];
+        const list = [...educationData];
         list.splice(index, 1);
-        setInputList(list);
+        setEducationData(list);
     };
 
     // handle click event of the Add button
     const handleAddClick = () => {
-        setInputList([...inputList,
+        setEducationData([...educationData,
         {
             degree: "",
             institute: "",
@@ -46,85 +46,138 @@ const Education = () => {
         },
         ]);
     };
-
+    const handleFormSubmit = (e) => {
+        e.preventDefault()
+        console.log(educationData)
+    }
     return (
         <div className="container">
             <div className="heading">
                 <h6>Where did you study?</h6>
             </div>
             <div className="form">
-                {inputList.map((event, index) => {
+                {educationData.map((event, index) => {
                     return (
-                        <form>
+                        <form >
                             <div className="row">
                                 <div className="col-lg-6 col-md-6 col-sm-12">
-                                    <label htmlFor="first name">Degree:</label>
+                                    <label htmlFor="degree">Degree:</label>
                                     <input
                                         type="text"
                                         className="form-control"
                                         placeholder="What did you study?
                 "
+                                        name='degree'
+                                        value={event.degree}
+                                        onChange={e => handleInputChange(e, index)}
+
                                     />
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-12">
-                                    <label htmlFor="middle name">School/College:</label>
+                                    <label htmlFor="institute">School/College:</label>
                                     <input
                                         type="text"
                                         className="form-control"
                                         placeholder="What school did you go to?
                 "
+                                        name='institute'
+                                        value={event.institute}
+                                        onChange={e => handleInputChange(e, index)}
+
                                     />
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-lg-6 col-md-6 col-sm-12">
-                                    <label htmlFor="first name">Percentage/CGPA:</label>
+                                    <label htmlFor="percent">Percentage/CGPA:</label>
                                     <input
                                         type="text"
                                         className="form-control"
                                         placeholder="What was your percentage?
                 "
+                                        name='percent'
+                                        value={event.percent}
+                                        onChange={e => handleInputChange(e, index)}
+
                                     />
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-12">
                                     <div className="row">
                                         <div className="col-lg-6">
-                                            <label htmlFor="from">Year of Study [From]:</label>
-                                            <input type="month" className="form-control" />
+                                            <label htmlFor="from">Start Date:</label>
+                                            <input
+                                                type="month"
+                                                className="form-control"
+                                                name='from'
+                                                value={event.from}
+                                                onChange={e => handleInputChange(e, index)}
+
+                                            />
                                         </div>
                                         <div className="col-lg-6">
-                                            <label htmlFor="to">Year of Study [To]:</label>
-                                            <input type="month" className="form-control" />
+                                            <label htmlFor="to">End Date:</label>
+                                            <input
+                                                type="month"
+                                                className="form-control"
+                                                name='to'
+                                                value={event.to}
+                                                onChange={e => handleInputChange(e, index)}
+
+                                            />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-lg-4 col-md-6 col-sm-12">
-                                    <label htmlFor="first name">City:</label>
-                                    <input type="text" className="form-control" placeholder="City" />
+                                    <label htmlFor="city">City:</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="City"
+                                        name='city'
+                                        value={event.city}
+                                        onChange={e => handleInputChange(e, index)}
+
+                                    />
                                 </div>
                                 <div className="col-lg-4 col-md-6 col-sm-12">
-                                    <label htmlFor="middle name">State:</label>
-                                    <input type="text" className="form-control" placeholder="State" />
+                                    <label htmlFor="state">State:</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="State"
+                                        name='state'
+                                        value={event.state}
+                                        onChange={e => handleInputChange(e, index)}
+
+                                    />
                                 </div>
                                 <div className="col-lg-4 col-md-6 col-sm-12">
                                     <div className="row">
                                         <div className="col-lg-6">
                                             {" "}
-                                            <label htmlFor="last name">Country:</label>
+                                            <label htmlFor="country">Country:</label>
                                             <input
                                                 type="text"
                                                 className="form-control"
                                                 placeholder="Country"
+                                                name='country'
+                                                value={event.country}
+                                                onChange={e => handleInputChange(e, index)}
+
                                             />
                                         </div>
                                         <div className="col-lg-6">
-                                            <label htmlFor="last name">pin code:</label>
+                                            <label htmlFor="pin">pin code:</label>
                                             <input
                                                 type="number"
                                                 className="form-control"
                                                 placeholder="Pin code"
+                                                name='pin'
+                                                value={event.pin}
+                                                onChange={e => handleInputChange(e, index)}
+
                                             />
                                         </div>
                                     </div>
@@ -133,10 +186,10 @@ const Education = () => {
                             <div className="row">
                                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
 
-                                    {inputList.length !== 1 && <button
+                                    {educationData.length !== 1 && <button
                                         className="btn btn-outline-danger"
                                         onClick={() => handleRemoveClick(index)}>Remove</button>}
-                                    {inputList.length - 1 === index && <button className="btn btn-outline-info" onClick={handleAddClick}>Add</button>}
+                                    {educationData.length - 1 === index && <button className="btn btn-outline-info" onClick={handleAddClick}>Add</button>}
 
                                 </div>
                             </div>
@@ -145,7 +198,7 @@ const Education = () => {
                 })}
             </div>
             <div class="d-grid gap-2">
-                <button class="btn btn-outline-success" type="submit">Save</button>
+                <button class="btn btn-outline-success" onClick={handleFormSubmit} type="submit">Save</button>
             </div>
         </div>
     );
