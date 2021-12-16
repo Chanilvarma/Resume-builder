@@ -200,15 +200,7 @@ const checkKeyDown = (e) => {
           </div>
           <div className="row">
               <label htmlFor="language">Languages Known:</label>
-              {/* <input
-                type="text"
-                className="form-control"
-                placeholder="Enter any languages what your good at. "
-                name='languages'
-                value={personalData.languages}
-                onChange={handleInputChange}
-              /> */}
-              <TagsInput className='form-control'  selectedTags={selectedTags}  tags={[]}/>
+              <TagsInput placeholder='Press enter to add Languages'  selectedTags={selectedTags}  tags={[]}/>
             </div>
           <div className="row">
             <button type='submit'  className="btn btn-outline-success">Save</button>
