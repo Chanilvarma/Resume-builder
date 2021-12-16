@@ -7,7 +7,7 @@ import Objective from './forms/Objective'
 import Personal from './forms/Personal'
 import Projects from './forms/Projects'
 import Skills from './forms/Skills'
-import BasicForm from './basicForm';
+
 const FormGrid = () => {
     const [active, setActive] = useState('personal')
     return (
@@ -34,9 +34,7 @@ const FormGrid = () => {
                             <button className={active === 'project'? 'nav-link active': 'nav-link'}  onClick={() => setActive('project')}>projects</button>
                         </li>
                         
-                        <li className="nav-item">
-                            <button className={active === 'basic'? 'nav-link active': 'nav-link'}  onClick={() => setActive('basic')}>basic</button>
-                        </li>
+                        
                         
                     </ul>
                 </div>
@@ -47,7 +45,7 @@ const FormGrid = () => {
                 {active === 'skill' && <Skills/>}
                 {active === 'experience' && <Experience/>}
                 {active === 'project' && <Projects/>}
-                {active === 'basic' && <BasicForm/>}
+            
                
                 </div>
             </div>

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import TagsInput from "../TagsInput";
 
 const Personal = () => {
+ const [data, setData] = useState({dataList:[],languages:[]})
+ const [lang, setLang] = useState([])
+ 
   const [personalData, setPersonalData] = useState([
     {
       firstName: "",
@@ -11,14 +15,16 @@ const Personal = () => {
       mobile: "",
       profile: "",
       link: "",
-      languages: [],
       city: "",
       state: "",
       country: "",
-      pin: ""
+      pin: "",
     },
   ]);
-
+  
+  const selectedTags = tags => {
+  setLang(tags)
+	};
   // handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,16 +36,24 @@ const Personal = () => {
 
 const handleFormSubmit = (e) =>{
   e.preventDefault();
-  console.log(personalData)
+setData({
+dataList: personalData,
+languages: lang
+})
+ console.log(data)
+ console.log(lang)
  setPersonalData('')
 }
+const checkKeyDown = (e) => {
+  if (e.code === 'Enter') e.preventDefault();
+};
   return (
     <div className="container">
       <div className="heading">
         <h6>How can employers contact you?</h6>
       </div>
       <div className="form">
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit} onKeyDown={(e) => checkKeyDown(e)}>
           <div className="row">
             <div className="col-lg-4 col-md-6 col-sm-12">
               <label htmlFor="first name">First name:</label>
@@ -110,7 +124,7 @@ const handleFormSubmit = (e) =>{
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-4 col-md-6 col-sm-12">
+            <div className="col-lg-6 col-md-6 col-sm-12">
               <label htmlFor="img">Profile Image:</label>
               <input
                 type="file"
@@ -120,7 +134,7 @@ const handleFormSubmit = (e) =>{
                 onChange={handleInputChange}
               />
             </div>
-            <div className="col-lg-4 col-md-6 col-sm-12">
+            <div className="col-lg-6 col-md-6 col-sm-12">
               <label htmlFor="link">Website Link/LinkedIn Profile:</label>
               <input
                 type="text"
@@ -131,17 +145,7 @@ const handleFormSubmit = (e) =>{
                 onChange={handleInputChange}
               />
             </div>
-            <div className="col-lg-4 col-md-6 col-sm-12">
-              <label htmlFor="language">Languages Known:</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter any languages what your good at. "
-                name='languages'
-                value={personalData.languages}
-                onChange={handleInputChange}
-              />
-            </div>
+            
           </div>
           <div className="row">
             <div className="col-lg-4 col-md-6 col-sm-12">
@@ -195,7 +199,19 @@ const handleFormSubmit = (e) =>{
             </div>
           </div>
           <div className="row">
-            <button type='submit' className="btn btn-outline-success">Save</button>
+              <label htmlFor="language">Languages Known:</label>
+              {/* <input
+                type="text"
+                className="form-control"
+                placeholder="Enter any languages what your good at. "
+                name='languages'
+                value={personalData.languages}
+                onChange={handleInputChange}
+              /> */}
+              <TagsInput className='form-control'  selectedTags={selectedTags}  tags={[]}/>
+            </div>
+          <div className="row">
+            <button type='submit'  className="btn btn-outline-success">Save</button>
           </div>
         </form>
       </div>
