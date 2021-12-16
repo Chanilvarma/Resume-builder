@@ -45,7 +45,7 @@ languages: lang
  setPersonalData('')
 }
 const checkKeyDown = (e) => {
-  if (e.code === 'Enter') e.preventDefault();
+  if (e.code === 'Enter');
 };
   return (
     <div className="container">
