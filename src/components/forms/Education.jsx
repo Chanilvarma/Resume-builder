@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
+import { GlobalContext } from '../../context/GlobalState';
 
 const Education = () => {
+    const { addUserData } = useContext(GlobalContext);
     const [educationData, setEducationData] = useState([
         {
             degree: "",
@@ -48,7 +50,7 @@ const Education = () => {
     };
     const handleFormSubmit = (e) => {
         e.preventDefault()
-        console.log(educationData)
+        addUserData(educationData)
     }
     return (
         <div className="container">

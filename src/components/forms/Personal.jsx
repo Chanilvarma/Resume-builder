@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import TagsInput from "../TagsInput";
+import { GlobalContext } from '../../context/GlobalState';
 
 const Personal = () => {
- const [data, setData] = useState({dataList:[],languages:[]})
- const [lang, setLang] = useState([])
- 
+  const { addUserData } = useContext(GlobalContext);
+  const [data, setData] = useState({ personalData: [], languages: [] })
+  const [lang, setLang] = useState([])
+
   const [personalData, setPersonalData] = useState([
     {
       firstName: "",
@@ -21,32 +23,30 @@ const Personal = () => {
       pin: "",
     },
   ]);
-  
+
   const selectedTags = tags => {
-  setLang(tags)
-	};
+    setLang(tags)
+  };
   // handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPersonalData({
       ...personalData,
-      [name]:value
+      [name]: value
     })
   };
 
-const handleFormSubmit = (e) =>{
-  e.preventDefault();
-setData({
-dataList: personalData,
-languages: lang
-})
- console.log(data)
- console.log(lang)
- setPersonalData('')
-}
-const checkKeyDown = (e) => {
-  if (e.code === 'Enter') e.preventDefault();
-};
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    setData({
+      personalData,
+      languages: lang
+    })
+    addUserData(data)
+  }
+  const checkKeyDown = (e) => {
+    if (e.code === 'Enter') e.preventDefault();
+  };
   return (
     <div className="container">
       <div className="heading">
@@ -145,7 +145,7 @@ const checkKeyDown = (e) => {
                 onChange={handleInputChange}
               />
             </div>
-            
+
           </div>
           <div className="row">
             <div className="col-lg-4 col-md-6 col-sm-12">
@@ -199,11 +199,11 @@ const checkKeyDown = (e) => {
             </div>
           </div>
           <div className="row">
-              <label htmlFor="language">Languages Known:</label>
-              <TagsInput placeholder='Press enter to add Languages'  selectedTags={selectedTags}  tags={[]}/>
-            </div>
+            <label htmlFor="language">Languages Known:</label>
+            <TagsInput placeholder='Press enter to add Languages' selectedTags={selectedTags} tags={[]} />
+          </div>
           <div className="row">
-            <button type='submit'  className="btn btn-outline-success">Save</button>
+            <button type='submit' className="btn btn-outline-success">Save</button>
           </div>
         </form>
       </div>

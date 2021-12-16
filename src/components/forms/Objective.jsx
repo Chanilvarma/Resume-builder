@@ -1,15 +1,17 @@
-import React, {useState} from "react";
+import React, { useState, useContext } from "react";
+import { GlobalContext } from '../../context/GlobalState';
 
 const Objective = () => {
-  const [objective, SetObjective] =useState('');
+  const { addUserData } = useContext(GlobalContext);
+  const [objective, SetObjective] = useState([{objective: ' '}]);
 
-  const handleFormSubmit = (e) =>{
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(objective)
+    addUserData(objective)
     SetObjective(' ')
   }
 
-  const hnadleReset = () =>{
+  const hnadleReset = () => {
     SetObjective(' ');
   }
   return (
@@ -24,8 +26,8 @@ const Objective = () => {
               <textarea
                 class="form-control"
                 placeholder="Enter a brief description of your professional background. You can choose to highlight specific skills, knowledge or industry experience."
-                value ={objective}
-                onChange={e => SetObjective(e.target.value)}
+                value={objective.objective}
+                onChange={e => SetObjective({objective: e.target.value})}
               ></textarea>
             </div>
           </div>
