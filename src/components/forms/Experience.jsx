@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
+import { GlobalContext } from "../../context/GlobalState";
 
 const Experience = () => {
+  const { addUserData } = useContext(GlobalContext);
   const [experienceData, setExperienceData] = useState([
     {
       role: "",
@@ -48,7 +50,7 @@ const Experience = () => {
   };
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    console.log(experienceData)
+    addUserData(experienceData)
 }
   return (
     <div className="container">
@@ -58,7 +60,7 @@ const Experience = () => {
       <div className="form">
         {experienceData.map((event, index) => {
           return (
-            <form>
+            <form onSubmit ={handleFormSubmit}>
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <label htmlFor="first name">Role:</label>

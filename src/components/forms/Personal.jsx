@@ -4,8 +4,6 @@ import { GlobalContext } from '../../context/GlobalState';
 
 const Personal = () => {
   const { addUserData } = useContext(GlobalContext);
-  const [data, setData] = useState({ personalData: [], languages: [] })
-  const [lang, setLang] = useState([])
 
   const [personalData, setPersonalData] = useState([
     {
@@ -21,11 +19,12 @@ const Personal = () => {
       state: "",
       country: "",
       pin: "",
+      lang:[]
     },
   ]);
 
   const selectedTags = tags => {
-    setLang(tags)
+    personalData.lang=tags
   };
   // handle input change
   const handleInputChange = (e) => {
@@ -38,11 +37,7 @@ const Personal = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    setData({
-      personalData,
-      languages: lang
-    })
-    addUserData(data)
+    addUserData(personalData)
   }
   const checkKeyDown = (e) => {
     if (e.code === 'Enter') e.preventDefault();

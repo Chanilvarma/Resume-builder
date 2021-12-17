@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
+import TagsInput from "../TagsInput";
+import { GlobalContext } from '../../context/GlobalState';
 
 const Projects = () => {
+  const { addUserData } = useContext(GlobalContext);
   const [projectData, setProjectData] = useState([
     {
       title: "",
-      tech: "",
+     
       description: '',
       from: "",
       to: "",
-
+      tech: [],
     },
   ]);
-
+  const selectedTags = tags => {
+    projectData.tech=tags
+    // console.log(projectData.tech);
+  };
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -32,7 +38,7 @@ const Projects = () => {
     setProjectData([...projectData,
     {
       title: "",
-      tech: "",
+      tech: [],
       description: '',
       from: "",
       to: "",
@@ -42,8 +48,12 @@ const Projects = () => {
   };
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    console.log(projectData)
+    addUserData(projectData)
   }
+
+  const checkKeyDown = (e) => {
+    if (e.code === 'Enter') e.preventDefault();
+  };
   return (
     <div className="container">
       <div className="heading">
@@ -52,7 +62,7 @@ const Projects = () => {
       <div className="form">
         {projectData.map((event, index) => {
           return (
-            <form>
+            <form  onKeyDown={(e) => checkKeyDown(e)}>
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <label htmlFor="title">Title:</label>
@@ -69,7 +79,8 @@ const Projects = () => {
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <label htmlFor="tech">Technologies:</label>
-                  <input
+                  <TagsInput placeholder='Press enter to add technologies' selectedTags={selectedTags} tags={[]} />
+                  {/* <input
                     type="text"
                     className="form-control"
                     placeholder="Menstion the technologies use for your project
@@ -78,7 +89,7 @@ const Projects = () => {
                     name='tech'
                     value={event.tech}
                     onChange={e => handleInputChange(e, index)}
-                  />
+                  /> */}
                 </div>
               </div>
               <div className="row">
